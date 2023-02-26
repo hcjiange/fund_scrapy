@@ -1,11 +1,11 @@
-from fund_scrapy.model import stock_model
-import os
-import json
+from fund_scrapy.model.stock_model import StockModel
+from fund_scrapy.model.nav_model import NavModel
 
 
 class Stock(object):
 
-    def save_stocks(self, stocks):
+    @staticmethod
+    def save_stocks(stocks):
 
         new_stocks = []
         for stock in stocks:
@@ -38,6 +38,24 @@ class Stock(object):
                 'isvalid': 1,
             })
 
-        stock_obj = stock_model.StockModel()
-        res = stock_obj.add_all(new_stocks)
+        stock_obj = StockModel()
+        res = stock_obj.save_all(new_stocks)
         return
+
+    @staticmethod
+    def save_history_nav(history_nav):
+
+        for nav in history_nav:
+            for key in nav:
+                if nav[key] is None:
+                    nav[key] = 0
+        nav_obj = NavModel()
+        res = nav_obj.save_all(history_nav)
+        return
+
+    @staticmethod
+    def get_stocks(where, page, page_size):
+        stock_model = StockModel()
+        stocks = stock_model.where(where).page(page, page_size).all()
+        print(stock_model.get_last_sql())
+        return stocks

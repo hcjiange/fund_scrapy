@@ -1,2 +1,1 @@
-import fund_scrapy
-from fund_scrapy import *
+from common.base_model import BaseModel

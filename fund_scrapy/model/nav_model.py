@@ -1,9 +1,9 @@
 from fund_scrapy.model import BaseModel
 
 
-class StockModel(BaseModel):
+class NavModel(BaseModel):
 
-    table = "xueqiu_stock"
+    table = "xueqiu_nav"
     database = "data_center"
     
     def __init__(self):

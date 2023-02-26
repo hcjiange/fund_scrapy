@@ -36,10 +36,10 @@ class StockSpider(scrapy.Spider):
                     cookies_str += str(m) + "=" + str(n.value) + "; "
         self.custom_settings["DEFAULT_REQUEST_HEADERS"]["cookie"] = cookies_str
         self.cookies = cookies
-        self.get_stocks(response)
+        self.get_stocks()
         return
 
-    def get_stocks(self, response):
+    def get_stocks(self):
 
         url = "https://stock.xueqiu.com/v5/stock/screener/quote/list.json"
 
@@ -73,5 +73,5 @@ class StockSpider(scrapy.Spider):
                 data = res['data']['list']
         if data is not None and len(data) > 0:
             Stock().save_stocks(data)
-            self.get_stocks(response)
+            self.get_stocks()
         return data
