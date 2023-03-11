@@ -57,5 +57,4 @@ class Stock(object):
     def get_stocks(where, page, page_size):
         stock_model = StockModel()
         stocks = stock_model.where(where).page(page, page_size).all()
-        print(stock_model.get_last_sql())
         return stocks

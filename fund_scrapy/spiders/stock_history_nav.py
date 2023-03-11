@@ -17,7 +17,7 @@ class StockSpider(scrapy.Spider):
     name = "sync_history_nav"
     start_urls = ["https://xueqiu.com/hq"]
     page = 0
-    page_size = 20
+    page_size = 100
 
     custom_settings = {
         "DEFAULT_REQUEST_HEADERS": {
@@ -49,7 +49,7 @@ class StockSpider(scrapy.Spider):
 
         url = "https://stock.xueqiu.com/v5/stock/chart/kline.json"
         self.page = self.page + 1
-        if self.page > 100:
+        if self.page > 300:
             return
 
         cache_id = Cache().read(keys.SPIDER_NAV + str(datetime.datetime.now().strftime("%Y%m%d")))
@@ -116,7 +116,6 @@ class StockSpider(scrapy.Spider):
                         'market_capital': item[16]
                     })
             Stock().save_history_nav(history_nav)
-        print(stocks)
         last_data = stocks[(len(stocks) - 1)]
         Cache().set(keys.SPIDER_NAV + str(datetime.datetime.now().strftime("%Y%m%d")), last_data["id"])
         time.sleep(5)
