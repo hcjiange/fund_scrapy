@@ -8,7 +8,7 @@ def REF(data: list, n: int):
         ref.append(False)
     ref_data = data[:-n]
     ref.extend(ref_data)
-    return ref
+    return np.array(ref)
 
 
 # n日最大
@@ -37,7 +37,7 @@ def LLV(data: list, n: int):
 def MA(data: list, n: int):
     data = np.array(data)
     ma = []
-    for index in range(1, len(data)):
+    for index in range(1, len(data) + 1):
         start_i = index - n
         if start_i < 0:
             start_i = 0
