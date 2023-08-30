@@ -70,10 +70,10 @@ class StockSpider(scrapy.Spider):
 
             params = {
                 'symbol': symbol,
-                'begin': int((str(begin) if begin is not None and str(begin) != "" else '1675699538966')),
+                'begin': int((str(begin) if begin is not None and str(begin) != "" else '1075699538966')),
                 'period': "day",
                 'type': "before",
-                'count': "-284",
+                'count': "10000",
                 'market': "CN",
                 'indicator': "kline,pe,pb,ps,pcf,market_capital,agt,ggt,balance",
             }
